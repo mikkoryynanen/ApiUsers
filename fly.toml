@@ -1,0 +1,25 @@
+# fly.toml file generated for api-users on 2022-11-30T14:06:09+02:00
+
+app = "api-users"
+kill_signal = "SIGINT"
+kill_timeout = 5
+
+[mounts]
+  source="mysqldata"
+  destination="/data"
+
+[env]
+  MYSQL_DATABASE = "api_users"
+  MYSQL_USER = "user"
+
+[build]
+  image = "mysql:8"
+
+[experimental]
+  cmd = [
+    "--default-authentication-plugin", 
+    "mysql_native_password", 
+    "--datadir", 
+    "--performance-schema=OFF",
+    "/data/mysql"
+  ]
