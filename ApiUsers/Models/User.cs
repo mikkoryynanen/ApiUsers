@@ -1,12 +1,15 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace ApiUsers.Models
 {
 	public class User
 	{
-		[Key]
-		public Guid ID { get; set; }
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string? Id { get; set; }
+        [BsonElement("ApiKey")]
 		public Guid ApiKey { get; set; }
 	}
 }

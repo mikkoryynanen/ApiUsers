@@ -1,14 +1,13 @@
 ﻿using ApiUsers.Database;
+using ApiUsers.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddDbContext<UserContext>(options =>
-{
-    options.UseInMemoryDatabase("UserDatabase");
-});
+builder.Services.Configure<ApiUsersDatabaseSettings>(
+    builder.Configuration.GetSection("ApiUsersDatabase"));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
